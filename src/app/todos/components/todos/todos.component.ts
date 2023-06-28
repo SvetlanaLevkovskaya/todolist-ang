@@ -9,20 +9,22 @@ import { LoggerService } from '../../../shared/services/logger.service';
   selector: 'tl-todos',
   templateUrl: './todos.component.html',
   styleUrls: ['./todos.component.css'],
+  providers: [LoggerService],
 })
 export class TodosComponent implements OnInit {
   todos$?: Observable<DomainTodo[]>
   todoTitle = ''
-  constructor(private todosService: TodosService, private authService: AuthService, private logger: LoggerService) {}
+  constructor(private todosService: TodosService, private authService: AuthService, private logger: LoggerService) {
+    this.logger.info('TodosComponent initialized', 'TodosComponent');
+  }
 
   ngOnInit(): void {
-    this.logger.info('TodosComponent initialized', 'TodosComponent');
     this.todos$ = this.todosService.todos$;
     this.todosService.getTodos();
   }
 
   addTodoHandler() {
-    this.logger.info('New Todo added', 'TodosComponent');
+    this.logger.warn('New Todo added', 'TodosComponent');
     this.todosService.addTodo(this.todoTitle);
     this.todoTitle = '';
   }
@@ -33,7 +35,7 @@ export class TodosComponent implements OnInit {
   }
 
   editTodo(data: { todoId: string; title: string }) {
-    this.logger.warn('Todo updated', 'TodosComponent', { todoId: data.todoId, title: data.title });
+    this.logger.info('Todo updated', 'TodosComponent', { todoId: data.todoId, title: data.title });
     this.todosService.updateTodoTitle(data.todoId, data.title);
   }
 
