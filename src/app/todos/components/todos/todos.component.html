@@ -1,0 +1,19 @@
+<div class="todos-main">
+  <div class="todos-header">
+    <h1>Angular TODO</h1>
+    <button (click)="logoutHandler()">Logout</button>
+  </div>
+
+  <div class="todos-input">
+    <input class="input" type="text" placeholder="Add new Todo" [(ngModel)]="todoTitle" />
+    <button (click)="addTodoHandler()">+</button>
+  </div>
+  <div class="todos-box">
+    <tl-todo
+      *ngFor="let todo of todos$ | async"
+      [todo]="todo"
+      (deleteTodoEvent)="deleteTodo($event)"
+      (editTodoEvent)="editTodo($event)"
+    ></tl-todo>
+  </div>
+</div>

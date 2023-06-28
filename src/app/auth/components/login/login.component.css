@@ -1,0 +1,21 @@
+.box {
+  width: 300px;
+  margin: 0 auto;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.error {
+  color: red;
+}
+
+.inputError {
+  background-color: rgba(191,79,97,0.75);
+}
+
+.inputSuccess {
+  background-color: rgba(96,191,44,0.75);
+}

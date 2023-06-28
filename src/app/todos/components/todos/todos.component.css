@@ -1,0 +1,32 @@
+.todos-main {
+  background-color: rgba(166, 168, 161, 0.89);
+  width: 100%;
+  height: 100%;
+}
+
+.todos-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.todos-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.input {
+  width: 300px;
+  border: 2px solid black;
+  padding: 10px;
+}
+
+.todos-box {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}

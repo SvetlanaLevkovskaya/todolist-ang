@@ -1,0 +1,20 @@
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px
+}
+
+.task-content {
+  display: flex;
+}
+
+.completed-task {
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+
+.input {
+  width: 100%;
+  border: 2px dashed black;
+}
