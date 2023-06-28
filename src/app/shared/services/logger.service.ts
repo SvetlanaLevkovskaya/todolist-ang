@@ -13,27 +13,35 @@ export class LoggerService {
   logLevel = LogLevel.Info
 
   info(message: string, file: any, param?: any): void {
-    this.logWith(LogLevel.Info, message, file, param)
+    if (this.logLevel >= LogLevel.Info) {
+      this.logWith(LogLevel.Info, message, file, param);
+    }
   }
 
   warn(message: string, file: any, param?: any): void {
-    this.logWith(LogLevel.Warn, message, file, param)
+    if (this.logLevel > LogLevel.Warn) {
+      this.logWith(LogLevel.Warn, message, file, param);
+    }
   }
 
   error(message: string, file: any, param?: any): void {
-    this.logWith(LogLevel.Error, message, file, param)
+    if (this.logLevel >= LogLevel.Error) {
+      this.logWith(LogLevel.Error, message, file, param);
+    }
   }
 
   private logWith(level: LogLevel, message: string, file: any, param: any = ''): void {
-    if (level <= this.logLevel) {
-      switch (level) {
-        case LogLevel.Error:
-          return console.error('%c ' + file + '--' + message, `color: red`, param)
-        case LogLevel.Warn:
-          return console.warn('%c ' + file + '--' + message, `color: orange`, param)
-        case LogLevel.Info:
-          return console.info('%c ' + file + '--' + message, `color: green`, param)
-      }
+    switch (level) {
+      case LogLevel.Error:
+        console.error('%c ' + file + '--' + message, `color: red`, param)
+        break
+      case LogLevel.Warn:
+        console.warn('%c ' + file + '--' + message, `color: orange`, param)
+        break
+      case LogLevel.Info:
+        console.info('%c ' + file + '--' + message, `color: green`, param)
+        break
     }
   }
 }
+
