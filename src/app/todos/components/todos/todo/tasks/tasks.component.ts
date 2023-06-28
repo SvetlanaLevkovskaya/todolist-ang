@@ -5,6 +5,7 @@ import { Task, UpdateTaskRequest } from 'src/app/todos/models/tasks.models'
 import { map } from 'rxjs/operators'
 import { TodosService } from 'src/app/todos/services/todos.service'
 import { TaskStatusEnum } from 'src/app/core/enums/taskStatus.enum'
+import { LoggerService } from '../../../../../shared/services/logger.service';
 
 @Component({
   selector: 'tl-tasks',
@@ -15,10 +16,11 @@ export class TasksComponent implements OnInit {
   @Input() todoId!: string
   tasks$?: Observable<Task[]>
   taskTitle = ''
-  constructor(private tasksService: TasksService, private todosService: TodosService) {}
+  constructor(private tasksService: TasksService, private todosService: TodosService, private loggerService: LoggerService) {}
 
   ngOnInit(): void {
     //subscribe
+    this.loggerService.info('TasksComponent initialized', 'TasksComponent');
     this.tasks$ = combineLatest([this.tasksService.tasks$, this.todosService.todos$]).pipe(
       map(res => {
         const tasks = res[0]
@@ -38,15 +40,18 @@ export class TasksComponent implements OnInit {
   }
 
   addTaskHandler() {
+    this.loggerService.info('Add task handler called', 'TasksComponent');
     this.tasksService.addTask(this.todoId, this.taskTitle)
     this.taskTitle = ''
   }
 
   deleteTask(taskId: string) {
+    this.loggerService.info('Deleting task with ID: ' + taskId, 'TasksComponent');
     this.tasksService.deleteTask(this.todoId, taskId)
   }
 
   changeTaskStatus(event: { taskId: string; newTask: UpdateTaskRequest }) {
+    this.loggerService.info('Changing task status for task with ID: ' + event.taskId, 'TasksComponent');
     this.tasksService.updateTask(this.todoId, event.taskId, event.newTask)
   }
 }
